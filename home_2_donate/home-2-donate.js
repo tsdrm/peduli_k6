@@ -13,12 +13,12 @@ const Request = Symbol.for("request");
 postman[Symbol.for("initial")]({
   options,
   environment: {
-    "project-host": "https://project-qa.pedulisehat.id",
-    "passport-host": "https://passport-qa.pedulisehat.id",
-    "psuic-host": "https://psuic-qa.pedulisehat.id",
-    "trade-host": "https://trade-qa.pedulisehat.id",
-    "activity-host": "https://activity-qa.pedulisehat.id",
-    "share-host": "https://share-qa.pedulisehat.id",
+    "project-host": "https://project-pre.pedulisehat.id",
+    "passport-host": "https://passport-pre.pedulisehat.id",
+    "psuic-host": "https://psuic-pre.pedulisehat.id",
+    "trade-host": "https://trade-pre.pedulisehat.id",
+    "activity-host": "https://activity-pre.pedulisehat.id",
+    "share-host": "https://share-pre.pedulisehat.id",
     project_short_link: "campaign20190628001",
     requestBody: '{"project_id":""}'
   }
@@ -58,28 +58,28 @@ export default function() {
   group("home-page", function() {
     postman[Request]({
       name: "project_search_history",
-      id: "5e4204f0-dfd2-4cfb-913e-2a42ebf47250",
+      id: "ea85f057-426b-497d-b18a-c0a668192551",
       method: "GET",
       address: "{{project-host}}/v1/project_search_history?_={{timestamp13}}"
     });
 
     postman[Request]({
       name: "user",
-      id: "fee5619d-3084-4d58-9a43-c9c09a7170d9",
+      id: "4d638550-da15-431b-9248-4a5f95a9bece",
       method: "GET",
       address: "{{passport-host}}/v1/user?_={{timestamp13}}"
     });
 
     postman[Request]({
       name: "search_popular_word",
-      id: "1c073587-d575-4734-8408-5e2b201d42cb",
+      id: "24ca2fe7-7757-4794-9eb5-9480315fda60",
       method: "GET",
       address: "{{project-host}}/v1/search_popular_word?_={{timestamp13}}"
     });
 
     postman[Request]({
       name: "public",
-      id: "ae6d5dfd-c4d6-4ef0-afc2-af42edc5cc67",
+      id: "53be7440-6c36-4b86-831f-0ee5408c1eea",
       method: "GET",
       address:
         "{{project-host}}/v1/public?page=1&limit=20&category_id=12,13&_={{timestamp13}}",
@@ -105,21 +105,21 @@ export default function() {
 
     postman[Request]({
       name: "banner",
-      id: "c7b5dfa3-c105-463d-9c23-caef3ab0c675",
+      id: "33cd18cc-c096-4eb2-9bc7-1b5637ce45cd",
       method: "GET",
       address: "{{project-host}}/v1/banner?_={{timestamp13}}"
     });
 
     postman[Request]({
       name: "level_rules",
-      id: "51a3da30-b5db-4f90-a7bf-d4bbf04a8216",
+      id: "e9762dd1-86a3-45ae-9aeb-9bd76adfd6a4",
       method: "GET",
       address: "{{psuic-host}}/v1/level_rules?_={{timestamp13}}"
     });
 
     postman[Request]({
       name: "user_level",
-      id: "0b7cec3f-d7a2-4653-901a-45147b0cd4a0",
+      id: "8deace0f-7a02-426b-9f27-69f7048e29e6",
       method: "GET",
       address: "{{psuic-host}}/v1/user_level?_={{timestamp13}}"
     });
@@ -128,7 +128,7 @@ export default function() {
   group("project-detail", function() {
     postman[Request]({
       name: "detail",
-      id: "9665df37-ae53-45b2-add9-a3840198bea8",
+      id: "c322e92c-0738-4211-9927-03e3d3a7073f",
       method: "GET",
       address:
         "{{project-host}}/v1/project/detail?project_id=&short_link={{project_short_link}}&_={{timestamp13}}",
@@ -147,7 +147,7 @@ export default function() {
 
     postman[Request]({
       name: "detail_id_link",
-      id: "db196bb4-34a3-4a98-9c77-323a503d61b3",
+      id: "ca46796a-cc8b-43b5-b220-f4808d237274",
       method: "GET",
       address:
         "{{project-host}}/v1/project/dynamic/update/detail?project_id={{project_id}}&short_link={{project_short_link}}&_={{timestamp13}}"
@@ -155,7 +155,7 @@ export default function() {
 
     postman[Request]({
       name: "share_short_link",
-      id: "ee80d03c-77f0-4127-bfc4-c0680c45f7c2",
+      id: "b534e86b-803d-4769-a4e2-6b0b93de0e1f",
       method: "POST",
       address: "{{share-host}}/v1/share_short_link",
       data: "{{requestBody}}",
@@ -175,7 +175,7 @@ export default function() {
 
     postman[Request]({
       name: "project_pv",
-      id: "a6ddb38c-53f9-4ea0-b778-ea3a48529bd5",
+      id: "0a5decad-7ebb-4a3b-b11b-4d91823f0241",
       method: "POST",
       address: "{{project-host}}/v1/project_pv",
       data: "{{requestBody}}",
@@ -195,7 +195,7 @@ export default function() {
 
     postman[Request]({
       name: "show",
-      id: "3004d520-dd7e-4e56-9fc3-61e09fe6834d",
+      id: "b8320e8c-da59-44fd-b860-463a64ecd435",
       method: "GET",
       address:
         "{{project-host}}/v1/project_verify/{{project_id}}/show?_={{timestamp13}}"
@@ -203,7 +203,7 @@ export default function() {
 
     postman[Request]({
       name: "statistics",
-      id: "cf55c9ec-b945-4ec9-9e10-c402ecf19ddb",
+      id: "2a64d346-d5e3-4c6a-b86e-4b07fc8de53b",
       method: "GET",
       address:
         "{{project-host}}/v1/statistics?project_id={{project_id}}&short_link={{project_short_link}}&_={{timestamp13}}"
@@ -211,7 +211,7 @@ export default function() {
 
     postman[Request]({
       name: "project_link",
-      id: "883095ec-37c7-4dda-9dff-bb2003a7cb99",
+      id: "23a45830-fc58-4195-a645-4e8675562afa",
       method: "GET",
       address:
         "{{project-host}}/v1/project_link?project_id={{project_id}}&_={{timestamp13}}"
@@ -219,7 +219,7 @@ export default function() {
 
     postman[Request]({
       name: "donated_carousels",
-      id: "ffc6bded-94fa-49b7-ae2f-2f0d1d2f387f",
+      id: "3ab7ffd8-efe8-40be-a938-674d262ec2c8",
       method: "GET",
       address:
         "{{trade-host}}/v1/donated_carousels?limit=200&project_id={{project_id}}&_={{timestamp13}}"
@@ -227,7 +227,7 @@ export default function() {
 
     postman[Request]({
       name: "project_confirm",
-      id: "a984b3d7-a26a-4466-9477-9bd147a7283b",
+      id: "9f92ebbc-abb5-41ce-b158-f25601426c96",
       method: "GET",
       address:
         "{{project-host}}/v1/project_confirm?project_id={{project_id}}&short_link={{project_short_link}}&_={{timestamp13}}"
@@ -235,7 +235,7 @@ export default function() {
 
     postman[Request]({
       name: "activities",
-      id: "1a5d32d4-8c58-4bfb-9d52-ba8fb5f2bcf2",
+      id: "78d0cc4e-1b61-4a53-b018-3b6565fd6ac7",
       method: "GET",
       address:
         "{{project-host}}/v1/activities?project_id={{project_id}}&_={{timestamp13}}"
@@ -243,7 +243,7 @@ export default function() {
 
     postman[Request]({
       name: "partner_card",
-      id: "fddbb8e4-19dc-4064-84ed-390d9f0bb4c4",
+      id: "8df59c65-09d0-4410-aa03-c3808a28045f",
       method: "GET",
       address:
         "{{activity-host}}/v1/prr/partner_card?project_id={{project_id}}&_={{timestamp13}}"
@@ -253,7 +253,7 @@ export default function() {
   group("donate", function() {
     postman[Request]({
       name: "detail",
-      id: "457e786b-12e1-4883-8ec8-b3946967bfe9",
+      id: "79528254-329b-489a-9f0e-68f11ac9db68",
       method: "GET",
       address:
         "{{project-host}}/v1/project/detail?project_id={{project_id}}&short_link={{project_short_link}}&_={{timestamp13}}"
@@ -261,7 +261,7 @@ export default function() {
 
     postman[Request]({
       name: "pay_channel",
-      id: "49d5b2fb-6100-456b-a7d1-880cf70e6203",
+      id: "1310b463-b8c8-41e2-8b24-22ca1d17fa0a",
       method: "GET",
       address: "{{trade-host}}/v2/pay_channel?_={{timestamp13}}"
     });

@@ -1,35 +1,35 @@
 {
-	"id": "6f00ad92-9e88-4e7a-97db-ee1b8741e663",
-	"name": "qa.peduli",
+	"id": "02031ec0-3921-4832-b7dc-cc32cb205699",
+	"name": "pre.peduli",
 	"values": [
 		{
 			"key": "project-host",
-			"value": "https://project-qa.pedulisehat.id",
+			"value": "https://project-pre.pedulisehat.id",
 			"enabled": true
 		},
 		{
 			"key": "passport-host",
-			"value": "https://passport-qa.pedulisehat.id",
+			"value": "https://passport-pre.pedulisehat.id",
 			"enabled": true
 		},
 		{
 			"key": "psuic-host",
-			"value": "https://psuic-qa.pedulisehat.id",
+			"value": "https://psuic-pre.pedulisehat.id",
 			"enabled": true
 		},
 		{
 			"key": "trade-host",
-			"value": "https://trade-qa.pedulisehat.id",
+			"value": "https://trade-pre.pedulisehat.id",
 			"enabled": true
 		},
 		{
 			"key": "activity-host",
-			"value": "https://activity-qa.pedulisehat.id",
+			"value": "https://activity-pre.pedulisehat.id",
 			"enabled": true
 		},
 		{
 			"key": "share-host",
-			"value": "https://share-qa.pedulisehat.id",
+			"value": "https://share-pre.pedulisehat.id",
 			"enabled": true
 		},
 		{
@@ -44,6 +44,6 @@
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2020-02-15T16:51:06.858Z",
-	"_postman_exported_using": "Postman/7.17.0"
+	"_postman_exported_at": "2020-02-17T02:19:00.015Z",
+	"_postman_exported_using": "Postman/7.18.0"
 }
