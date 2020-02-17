@@ -1,0 +1,810 @@
+{
+	"info": {
+		"_postman_id": "544df551-d8c7-4a0c-9e8c-ec1b89f379a7",
+		"name": "peduli",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "home-page",
+			"item": [
+				{
+					"name": "project_search_history",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5d21def7-a305-4a6b-bae3-aefbeff0f607",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "5645c81a-01dc-41e5-a865-3c0a18088828",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project-host}}/v1/project_search_history?_={{timestamp13}}",
+							"host": [
+								"{{project-host}}"
+							],
+							"path": [
+								"v1",
+								"project_search_history"
+							],
+							"query": [
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "344dd3c8-45b0-4262-94f3-0038a2ca0617",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{passport-host}}/v1/user?_={{timestamp13}}",
+							"host": [
+								"{{passport-host}}"
+							],
+							"path": [
+								"v1",
+								"user"
+							],
+							"query": [
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search_popular_word",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project-host}}/v1/search_popular_word?_={{timestamp13}}",
+							"host": [
+								"{{project-host}}"
+							],
+							"path": [
+								"v1",
+								"search_popular_word"
+							],
+							"query": [
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "public",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "82a27f2b-eb11-4d4c-8113-f54bc38de1ac",
+								"exec": [
+									"var body = JSON.parse(responseBody) || {};",
+									"var data = body.data;",
+									"",
+									"// 断言项目列表长度大于2，取第二个项目为测试例子",
+									"pm.test(\"[home-page] public data length is above 2\", function () {",
+									"    pm.expect(data.length).to.be.above(2);     ",
+									"});",
+									"",
+									"var project = data[1] || {};",
+									"",
+									"// 断言短链的长度不为空",
+									"pm.test(\"[home-page] public shor_ling is valid\", function() {",
+									"    pm.expect(project.short_link.length).to.be.above(1);",
+									"});",
+									"",
+									"",
+									"pm.globals.set(\"project_short_link\", project.short_link);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project-host}}/v1/public?page=1&limit=20&category_id=12,13&_={{timestamp13}}",
+							"host": [
+								"{{project-host}}"
+							],
+							"path": [
+								"v1",
+								"public"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "category_id",
+									"value": "12,13"
+								},
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "banner",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project-host}}/v1/banner?_={{timestamp13}}",
+							"host": [
+								"{{project-host}}"
+							],
+							"path": [
+								"v1",
+								"banner"
+							],
+							"query": [
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "level_rules",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{psuic-host}}/v1/level_rules?_={{timestamp13}}",
+							"host": [
+								"{{psuic-host}}"
+							],
+							"path": [
+								"v1",
+								"level_rules"
+							],
+							"query": [
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user_level",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{psuic-host}}/v1/user_level?_={{timestamp13}}",
+							"host": [
+								"{{psuic-host}}"
+							],
+							"path": [
+								"v1",
+								"user_level"
+							],
+							"query": [
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "加载首页时异步请求接口",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "988aa2b9-7c4a-4bd1-bcde-c9c8c204ac55",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b66c958-dbce-4caf-83c5-a4a0b61717af",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "project-detail",
+			"item": [
+				{
+					"name": "detail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2681ba0d-a571-47d2-a3e1-549a3ade9d45",
+								"exec": [
+									"var body = JSON.parse(responseBody) || {};",
+									"var data = body.data || {};",
+									"",
+									"// 判断字段的是否存在",
+									"var user_id = data.user_id;",
+									"var project_id = data.project_id;",
+									"",
+									"pm.variables.set(\"user_id\", user_id);",
+									"pm.variables.set(\"project_id\", project_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project-host}}/v1/project/detail?project_id=&short_link={{project_short_link}}&_={{timestamp13}}",
+							"host": [
+								"{{project-host}}"
+							],
+							"path": [
+								"v1",
+								"project",
+								"detail"
+							],
+							"query": [
+								{
+									"key": "project_id",
+									"value": ""
+								},
+								{
+									"key": "short_link",
+									"value": "{{project_short_link}}"
+								},
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "detail_id_link",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project-host}}/v1/project/dynamic/update/detail?project_id={{project_id}}&short_link={{project_short_link}}&_={{timestamp13}}",
+							"host": [
+								"{{project-host}}"
+							],
+							"path": [
+								"v1",
+								"project",
+								"dynamic",
+								"update",
+								"detail"
+							],
+							"query": [
+								{
+									"key": "project_id",
+									"value": "{{project_id}}"
+								},
+								{
+									"key": "short_link",
+									"value": "{{project_short_link}}"
+								},
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "share_short_link",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3b3c2c8f-88a1-4780-98b0-e20ef0cbd980",
+								"exec": [
+									"var project_id = pm.variables.get(\"project_id\");",
+									"var project_short_link = pm.variables.get(\"project_short_link\");",
+									"var requestBody = {",
+									"    \"item_id\": project_id,",
+									"    \"item_type\":1,",
+									"    \"item_short_link\": project_short_link",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{requestBody}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{share-host}}/v1/share_short_link",
+							"host": [
+								"{{share-host}}"
+							],
+							"path": [
+								"v1",
+								"share_short_link"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "project_pv",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f3c5b5e4-e78b-477e-b6a4-e7e1d56c6a5e",
+								"exec": [
+									"var project_short_link = pm.globals.get(\"project_short_link\"); ",
+									"var requestBody = {",
+									"    \"project_id\": \"\",",
+									"    \"short_link\": project_short_link,",
+									"}",
+									"",
+									"pm.variables.set(\"requestBody\", JSON.stringify(requestBody));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "f995b4ad-4498-49de-8c99-00e994ecb05b",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{requestBody}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{project-host}}/v1/project_pv",
+							"host": [
+								"{{project-host}}"
+							],
+							"path": [
+								"v1",
+								"project_pv"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project-host}}/v1/project_verify/{{project_id}}/show?_={{timestamp13}}",
+							"host": [
+								"{{project-host}}"
+							],
+							"path": [
+								"v1",
+								"project_verify",
+								"{{project_id}}",
+								"show"
+							],
+							"query": [
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "statistics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project-host}}/v1/statistics?project_id={{project_id}}&short_link={{project_short_link}}&_={{timestamp13}}",
+							"host": [
+								"{{project-host}}"
+							],
+							"path": [
+								"v1",
+								"statistics"
+							],
+							"query": [
+								{
+									"key": "project_id",
+									"value": "{{project_id}}"
+								},
+								{
+									"key": "short_link",
+									"value": "{{project_short_link}}"
+								},
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "project_link",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project-host}}/v1/project_link?project_id={{project_id}}&_={{timestamp13}}",
+							"host": [
+								"{{project-host}}"
+							],
+							"path": [
+								"v1",
+								"project_link"
+							],
+							"query": [
+								{
+									"key": "project_id",
+									"value": "{{project_id}}"
+								},
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "donated_carousels",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{trade-host}}/v1/donated_carousels?limit=200&project_id={{project_id}}&_={{timestamp13}}",
+							"host": [
+								"{{trade-host}}"
+							],
+							"path": [
+								"v1",
+								"donated_carousels"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "200"
+								},
+								{
+									"key": "project_id",
+									"value": "{{project_id}}"
+								},
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "project_confirm",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project-host}}/v1/project_confirm?project_id={{project_id}}&short_link={{project_short_link}}&_={{timestamp13}}",
+							"host": [
+								"{{project-host}}"
+							],
+							"path": [
+								"v1",
+								"project_confirm"
+							],
+							"query": [
+								{
+									"key": "project_id",
+									"value": "{{project_id}}"
+								},
+								{
+									"key": "short_link",
+									"value": "{{project_short_link}}"
+								},
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "activities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project-host}}/v1/activities?project_id={{project_id}}&_={{timestamp13}}",
+							"host": [
+								"{{project-host}}"
+							],
+							"path": [
+								"v1",
+								"activities"
+							],
+							"query": [
+								{
+									"key": "project_id",
+									"value": "{{project_id}}"
+								},
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "partner_card",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{activity-host}}/v1/prr/partner_card?project_id={{project_id}}&_={{timestamp13}}",
+							"host": [
+								"{{activity-host}}"
+							],
+							"path": [
+								"v1",
+								"prr",
+								"partner_card"
+							],
+							"query": [
+								{
+									"key": "project_id",
+									"value": "{{project_id}}"
+								},
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "donate",
+			"item": [
+				{
+					"name": "detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{project-host}}/v1/project/detail?project_id={{project_id}}&short_link={{project_short_link}}&_={{timestamp13}}",
+							"host": [
+								"{{project-host}}"
+							],
+							"path": [
+								"v1",
+								"project",
+								"detail"
+							],
+							"query": [
+								{
+									"key": "project_id",
+									"value": "{{project_id}}"
+								},
+								{
+									"key": "short_link",
+									"value": "{{project_short_link}}"
+								},
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pay_channel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{trade-host}}/v2/pay_channel?_={{timestamp13}}",
+							"host": [
+								"{{trade-host}}"
+							],
+							"path": [
+								"v2",
+								"pay_channel"
+							],
+							"query": [
+								{
+									"key": "_",
+									"value": "{{timestamp13}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "95e78822-969f-47d4-97fb-4eb43450480a",
+				"type": "text/javascript",
+				"exec": [
+					"// 预定义13位时间戳",
+					"pm.globals.set(\"timestamp13\", Math.round(new Date()));"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "bfca810a-68b9-40c7-8f9e-47c1125f9895",
+				"type": "text/javascript",
+				"exec": [
+					"// 每个请求设置超时时间，超过10s则认为断言失败",
+					"var cost = pm.response.responseTime;",
+					"pm.test(\"responseTime is: \" + cost, function() {",
+					"    pm.expect(cost).to.be.below(10000);",
+					"});",
+					"",
+					"// 请求的返回值判断是否为200",
+					"",
+					"// // 用户信息接口可能200，401",
+					"// var request401 = [];",
+					"",
+					"// if (request401.indexOf(pm.request.url.path) > -1) {",
+					"//     pm.expect(pm.response.code).to.be.oneOf([200,401]);    ",
+					"//     return;",
+					"// }",
+					"",
+					"// 其余判断为200",
+					"pm.test[\"response code is not 200 or 401\", function (){",
+					"    pm.expect(pm.response.code).to.be.oneOf([200,401]);",
+					"}]",
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

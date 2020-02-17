@@ -1,0 +1,49 @@
+{
+	"id": "6f00ad92-9e88-4e7a-97db-ee1b8741e663",
+	"name": "qa.peduli",
+	"values": [
+		{
+			"key": "project-host",
+			"value": "https://project-qa.pedulisehat.id",
+			"enabled": true
+		},
+		{
+			"key": "passport-host",
+			"value": "https://passport-qa.pedulisehat.id",
+			"enabled": true
+		},
+		{
+			"key": "psuic-host",
+			"value": "https://psuic-qa.pedulisehat.id",
+			"enabled": true
+		},
+		{
+			"key": "trade-host",
+			"value": "https://trade-qa.pedulisehat.id",
+			"enabled": true
+		},
+		{
+			"key": "activity-host",
+			"value": "https://activity-qa.pedulisehat.id",
+			"enabled": true
+		},
+		{
+			"key": "share-host",
+			"value": "https://share-qa.pedulisehat.id",
+			"enabled": true
+		},
+		{
+			"key": "project_short_link",
+			"value": "campaign20190628001",
+			"enabled": true
+		},
+		{
+			"key": "requestBody",
+			"value": "{\"project_id\":\"\"}",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2020-02-17T02:25:34.641Z",
+	"_postman_exported_using": "Postman/7.18.0"
+}
