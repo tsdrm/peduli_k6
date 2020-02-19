@@ -123,7 +123,7 @@
 								"id": "82a27f2b-eb11-4d4c-8113-f54bc38de1ac",
 								"exec": [
 									"var body = JSON.parse(responseBody) || {};",
-									"var data = body.data;",
+									"var data = body.data || [];",
 									"",
 									"// 断言项目列表长度大于2，取第二个项目为测试例子",
 									"pm.test(\"[home-page] public data length is above 2\", function () {",
@@ -291,10 +291,13 @@
 									"var data = body.data || {};",
 									"",
 									"// 判断字段的是否存在",
-									"var user_id = data.user_id;",
-									"var project_id = data.project_id;",
+									"var user_id = data.user_id + '';",
+									"var project_id = data.project_id + '';",
 									"",
-									"pm.variables.set(\"user_id\", user_id);",
+									"// console.log('detail ---', user_id, \"---\", project_id);",
+									"",
+									"pm.globals.set(\"user_id\", user_id);",
+									"pm.globals.set(\"project_id\", project_id);",
 									"pm.variables.set(\"project_id\", project_id);"
 								],
 								"type": "text/javascript"
@@ -376,13 +379,13 @@
 								"id": "3b3c2c8f-88a1-4780-98b0-e20ef0cbd980",
 								"exec": [
 									"var project_id = pm.variables.get(\"project_id\");",
-									"var project_short_link = pm.variables.get(\"project_short_link\");",
+									"var project_short_link = pm.globals.get(\"project_short_link\");",
 									"var requestBody = {",
 									"    \"item_id\": project_id,",
 									"    \"item_type\":1,",
 									"    \"item_short_link\": project_short_link",
 									"}",
-									""
+									"pm.variables.set(\"requestBody\", JSON.stringify(requestBody));"
 								],
 								"type": "text/javascript"
 							}
@@ -491,6 +494,20 @@
 				},
 				{
 					"name": "show",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e7afc472-5ebc-44cf-827f-85444a015a9c",
+								"exec": [
+									"var project_id = pm.variables.get(\"project_id\");",
+									"// console.log('-------', project_id);",
+									" "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -697,6 +714,31 @@
 					"response": []
 				}
 			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2ddabbf2-bc7b-4d76-b7d8-512294c3a5ad",
+						"type": "text/javascript",
+						"exec": [
+							"// var project_short_link = pm.globals.get(\"project_short_link\");",
+							"// if (!project_short_link || project_short_link === '' ||  project_short_link.indexOf(\"campaign\") === -1) {",
+							"//     pm.globals.set(\"project_short_link\", 'campaign20190628001');",
+							"// }"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "e85adb0d-df44-4d33-b1f2-ab31c7834c0a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
 			"protocolProfileBehavior": {}
 		},
 		{
@@ -760,6 +802,36 @@
 					"response": []
 				}
 			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "dcb59034-c564-468e-bfec-9ae02383cb3a",
+						"type": "text/javascript",
+						"exec": [
+							"// var project_id = pm.variables.get(\"project_id\") + '';",
+							"// var project_short_link = pm.variables.get(\"project_short_link\");",
+							"// if (!project_short_link || project_short_link === '' || project_short_link.indexOf(\"campaign\") === -1) {",
+							"//     pm.globals.set(\"project_short_link\", 'campaign20190628001');",
+							"// }",
+							"",
+							"// if (!project_id || project_id === ''){",
+							"//     pm.globals.set(\"project_id\", '14221178668964681602');",
+							"// }"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "44e896d6-5395-459e-bea7-79cc369d4f87",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
 			"protocolProfileBehavior": {}
 		}
 	],
@@ -798,9 +870,9 @@
 					"// }",
 					"",
 					"// 其余判断为200",
-					"pm.test[\"response code is not 200 or 401\", function (){",
+					"pm.test(\"response code is not 200 or 401\", function (){",
 					"    pm.expect(pm.response.code).to.be.oneOf([200,401]);",
-					"}]",
+					"})",
 					""
 				]
 			}

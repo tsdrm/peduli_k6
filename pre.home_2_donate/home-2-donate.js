@@ -47,45 +47,42 @@ export default function() {
     // }
 
     // 其余判断为200
-    pm.test[
-      ("response code is not 200 or 401",
-      function() {
-        pm.expect(pm.response.code).to.be.oneOf([200, 401]);
-      })
-    ];
+    pm.test("response code is not 200 or 401", function() {
+      pm.expect(pm.response.code).to.be.oneOf([200, 401]);
+    });
   });
 
   group("home-page", function() {
     postman[Request]({
       name: "project_search_history",
-      id: "ea85f057-426b-497d-b18a-c0a668192551",
+      id: "21cb4376-02fe-4cb8-8e78-05be3449f60c",
       method: "GET",
       address: "{{project-host}}/v1/project_search_history?_={{timestamp13}}"
     });
 
     postman[Request]({
       name: "user",
-      id: "4d638550-da15-431b-9248-4a5f95a9bece",
+      id: "2f5b7c1b-515a-4ece-a170-501ef8429cd3",
       method: "GET",
       address: "{{passport-host}}/v1/user?_={{timestamp13}}"
     });
 
     postman[Request]({
       name: "search_popular_word",
-      id: "24ca2fe7-7757-4794-9eb5-9480315fda60",
+      id: "47612600-fe1b-44d9-9396-0bb17b06119b",
       method: "GET",
       address: "{{project-host}}/v1/search_popular_word?_={{timestamp13}}"
     });
 
     postman[Request]({
       name: "public",
-      id: "53be7440-6c36-4b86-831f-0ee5408c1eea",
+      id: "038afd60-815d-4652-86a5-2baadde4594e",
       method: "GET",
       address:
         "{{project-host}}/v1/public?page=1&limit=20&category_id=12,13&_={{timestamp13}}",
       post(response) {
         var body = JSON.parse(responseBody) || {};
-        var data = body.data;
+        var data = body.data || [];
 
         // 断言项目列表长度大于2，取第二个项目为测试例子
         pm.test("[home-page] public data length is above 2", function() {
@@ -105,30 +102,37 @@ export default function() {
 
     postman[Request]({
       name: "banner",
-      id: "33cd18cc-c096-4eb2-9bc7-1b5637ce45cd",
+      id: "a36c6ece-9dc9-496f-bd24-cfe29b5b8d1c",
       method: "GET",
       address: "{{project-host}}/v1/banner?_={{timestamp13}}"
     });
 
     postman[Request]({
       name: "level_rules",
-      id: "e9762dd1-86a3-45ae-9aeb-9bd76adfd6a4",
+      id: "834970d4-6171-4049-81d7-4bd41b789652",
       method: "GET",
       address: "{{psuic-host}}/v1/level_rules?_={{timestamp13}}"
     });
 
     postman[Request]({
       name: "user_level",
-      id: "8deace0f-7a02-426b-9f27-69f7048e29e6",
+      id: "b8229dc4-26d3-443f-a801-7efa7cb45d89",
       method: "GET",
       address: "{{psuic-host}}/v1/user_level?_={{timestamp13}}"
     });
   });
 
   group("project-detail", function() {
+    postman[Pre].push(() => {
+      // var project_short_link = pm.globals.get("project_short_link");
+      // if (!project_short_link || project_short_link === '' ||  project_short_link.indexOf("campaign") === -1) {
+      //     pm.globals.set("project_short_link", 'campaign20190628001');
+      // }
+    });
+
     postman[Request]({
       name: "detail",
-      id: "c322e92c-0738-4211-9927-03e3d3a7073f",
+      id: "32016d40-fa0b-457d-bf45-9bfdbd8a7fcb",
       method: "GET",
       address:
         "{{project-host}}/v1/project/detail?project_id=&short_link={{project_short_link}}&_={{timestamp13}}",
@@ -137,17 +141,20 @@ export default function() {
         var data = body.data || {};
 
         // 判断字段的是否存在
-        var user_id = data.user_id;
-        var project_id = data.project_id;
+        var user_id = data.user_id + "";
+        var project_id = data.project_id + "";
 
-        pm.variables.set("user_id", user_id);
+        // console.log('detail ---', user_id, "---", project_id);
+
+        pm.globals.set("user_id", user_id);
+        pm.globals.set("project_id", project_id);
         pm.variables.set("project_id", project_id);
       }
     });
 
     postman[Request]({
       name: "detail_id_link",
-      id: "ca46796a-cc8b-43b5-b220-f4808d237274",
+      id: "772f908f-6a65-4d35-b4c0-153567ea58bb",
       method: "GET",
       address:
         "{{project-host}}/v1/project/dynamic/update/detail?project_id={{project_id}}&short_link={{project_short_link}}&_={{timestamp13}}"
@@ -155,7 +162,7 @@ export default function() {
 
     postman[Request]({
       name: "share_short_link",
-      id: "b534e86b-803d-4769-a4e2-6b0b93de0e1f",
+      id: "fe51e36f-5dd5-41c0-93e2-0c8a9501683c",
       method: "POST",
       address: "{{share-host}}/v1/share_short_link",
       data: "{{requestBody}}",
@@ -164,18 +171,19 @@ export default function() {
       },
       pre() {
         var project_id = pm.variables.get("project_id");
-        var project_short_link = pm.variables.get("project_short_link");
+        var project_short_link = pm.globals.get("project_short_link");
         var requestBody = {
           item_id: project_id,
           item_type: 1,
           item_short_link: project_short_link
         };
+        pm.variables.set("requestBody", JSON.stringify(requestBody));
       }
     });
 
     postman[Request]({
       name: "project_pv",
-      id: "0a5decad-7ebb-4a3b-b11b-4d91823f0241",
+      id: "8a942696-6a8f-49aa-a670-2d514525ddc8",
       method: "POST",
       address: "{{project-host}}/v1/project_pv",
       data: "{{requestBody}}",
@@ -195,15 +203,19 @@ export default function() {
 
     postman[Request]({
       name: "show",
-      id: "b8320e8c-da59-44fd-b860-463a64ecd435",
+      id: "8503158a-357b-44c1-97aa-ea55ea1aa09e",
       method: "GET",
       address:
-        "{{project-host}}/v1/project_verify/{{project_id}}/show?_={{timestamp13}}"
+        "{{project-host}}/v1/project_verify/{{project_id}}/show?_={{timestamp13}}",
+      pre() {
+        var project_id = pm.variables.get("project_id");
+        // console.log('-------', project_id);
+      }
     });
 
     postman[Request]({
       name: "statistics",
-      id: "2a64d346-d5e3-4c6a-b86e-4b07fc8de53b",
+      id: "b2423d3e-af85-4272-8deb-26c0966857bb",
       method: "GET",
       address:
         "{{project-host}}/v1/statistics?project_id={{project_id}}&short_link={{project_short_link}}&_={{timestamp13}}"
@@ -211,7 +223,7 @@ export default function() {
 
     postman[Request]({
       name: "project_link",
-      id: "23a45830-fc58-4195-a645-4e8675562afa",
+      id: "e4ede7ef-6d49-4745-8442-3721bbc02a6e",
       method: "GET",
       address:
         "{{project-host}}/v1/project_link?project_id={{project_id}}&_={{timestamp13}}"
@@ -219,7 +231,7 @@ export default function() {
 
     postman[Request]({
       name: "donated_carousels",
-      id: "3ab7ffd8-efe8-40be-a938-674d262ec2c8",
+      id: "092628a1-c838-44bd-927d-2a23f3c22113",
       method: "GET",
       address:
         "{{trade-host}}/v1/donated_carousels?limit=200&project_id={{project_id}}&_={{timestamp13}}"
@@ -227,7 +239,7 @@ export default function() {
 
     postman[Request]({
       name: "project_confirm",
-      id: "9f92ebbc-abb5-41ce-b158-f25601426c96",
+      id: "931b716d-5dde-4352-81c3-fea445901e7b",
       method: "GET",
       address:
         "{{project-host}}/v1/project_confirm?project_id={{project_id}}&short_link={{project_short_link}}&_={{timestamp13}}"
@@ -235,7 +247,7 @@ export default function() {
 
     postman[Request]({
       name: "activities",
-      id: "78d0cc4e-1b61-4a53-b018-3b6565fd6ac7",
+      id: "c0db2234-1dc1-49b7-80a7-a26b4a924ed2",
       method: "GET",
       address:
         "{{project-host}}/v1/activities?project_id={{project_id}}&_={{timestamp13}}"
@@ -243,17 +255,30 @@ export default function() {
 
     postman[Request]({
       name: "partner_card",
-      id: "8df59c65-09d0-4410-aa03-c3808a28045f",
+      id: "2964e77d-7991-498e-89c3-343602ad3c7b",
       method: "GET",
       address:
         "{{activity-host}}/v1/prr/partner_card?project_id={{project_id}}&_={{timestamp13}}"
     });
+
+    postman[Pre].pop();
   });
 
   group("donate", function() {
+    postman[Pre].push(() => {
+      // var project_id = pm.variables.get("project_id") + '';
+      // var project_short_link = pm.variables.get("project_short_link");
+      // if (!project_short_link || project_short_link === '' || project_short_link.indexOf("campaign") === -1) {
+      //     pm.globals.set("project_short_link", 'campaign20190628001');
+      // }
+      // if (!project_id || project_id === ''){
+      //     pm.globals.set("project_id", '14221178668964681602');
+      // }
+    });
+
     postman[Request]({
       name: "detail",
-      id: "79528254-329b-489a-9f0e-68f11ac9db68",
+      id: "e229e313-828b-4fec-9e29-7026a25e5371",
       method: "GET",
       address:
         "{{project-host}}/v1/project/detail?project_id={{project_id}}&short_link={{project_short_link}}&_={{timestamp13}}"
@@ -261,10 +286,12 @@ export default function() {
 
     postman[Request]({
       name: "pay_channel",
-      id: "1310b463-b8c8-41e2-8b24-22ca1d17fa0a",
+      id: "41a806db-cf33-4d53-9734-2d077817a82e",
       method: "GET",
       address: "{{trade-host}}/v2/pay_channel?_={{timestamp13}}"
     });
+
+    postman[Pre].pop();
   });
 
   postman[Pre].pop();
